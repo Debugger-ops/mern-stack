@@ -1,0 +1,46 @@
+.header1{
+    color: red;
+}
+.header2{
+    font-size: 30px;
+    color:  rgb(10, 234, 10);
+    font-style: italic;
+}
+.line1{
+    font-style: italic;
+    text-decoration: underline;
+}
+
+.line2{
+    background-color: yellow;
+    width: 220px;
+
+}
+.para1{
+    padding: 10px;
+    color: brown;
+    font-size: large;
+}
+
+.tom{
+    
+    padding: 10px;
+    margin: 10px;
+    gap: 20px;
+}
+
+.tom li {
+    margin-bottom: 15px;
+}
+.para1 ul{
+    font-family: Arial, sans-serif;
+    padding-left: 40px;
+}
+.line3{
+    font-size: 12px;
+
+}
+
+.line4{
+    font-style: italic;
+}
