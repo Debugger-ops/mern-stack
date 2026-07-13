@@ -1,0 +1,47 @@
+*{
+  padding: 10px;
+  margin: 10px;
+  height: 100%;
+  width: 100%;
+
+}
+
+.card1{
+    background-color: green;
+    position: relative;
+    height: 200px;
+    width: 200px;
+      left: 700px;
+    bottom: 00px;
+    z-index: 4;
+}
+
+.card2{
+    background-color: yellow;
+    position: relative;
+    height: 200px;
+    width: 200px;
+     left: 600px;
+    bottom: 100px;
+    z-index: 3;
+}
+
+.card3{
+    background-color: red;
+    position: relative;
+    height: 200px;
+    width: 200px;
+    left: 500px;
+    bottom: 200px;
+    z-index: 2;
+}
+
+.card4{
+    background-color: blue;
+    position: relative;
+    height: 200px;
+    width: 200px;
+    left: 400px;
+    bottom: 300px;
+    z-index:1;
+}

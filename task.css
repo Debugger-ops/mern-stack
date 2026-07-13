@@ -35,6 +35,10 @@
 .para1 ul{
     font-family: Arial, sans-serif;
     padding-left: 40px;
+      /* Makes text thicker */
+    letter-spacing: 5px;   /* Adds space between letters */
+    line-height: 1.8;      /* Adds space between lines */
+    word-spacing: 3px; 
 }
 .line3{
     font-size: 12px;

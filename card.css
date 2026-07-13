@@ -1,0 +1,13 @@
+.main{
+    position: relative;
+    left: 100px;
+    height: 100px;
+    width: 100px;
+    background-color: red;
+
+}
+/* .card{
+    padding: 40px;
+    border: 2px solid black;
+    background-color: aqua;
+} */
