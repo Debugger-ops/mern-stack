@@ -1,0 +1,343 @@
+/* =====================================================
+   JEE Coaching Institute — task3.css
+   Palette: Deep navy #0D1B2A | Gold #F0A500 | Off-white #F5F0E8
+   Accent: Warm amber #E07B00 | Muted slate #4A6080 | Card bg #132236
+   Type: display = system condensed stack; body = 'Segoe UI' / sans
+   ===================================================== */
+
+@import url('https://fonts.googleapis.com/css2?family=Oswald:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap');
+
+/* ---------- Reset & Base ---------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: #0D1B2A;
+  color: #F5F0E8;
+  font-family: 'Inter', 'Segoe UI', system-ui, sans-serif;
+  font-size: 16px;
+  line-height: 1.7;
+  -webkit-font-smoothing: antialiased;
+}
+
+/* ---------- Wrapper ---------- */
+.main {
+  max-width: 1100px;
+  margin: 0 auto;
+  padding: 0 24px 80px;
+}
+
+/* ---------- Global headings ---------- */
+h1 {
+  font-family: 'Oswald', 'Arial Narrow', sans-serif;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  text-transform: uppercase;
+  line-height: 1.15;
+}
+
+/* ---------- SECTION 1 — Hero / Nav ---------- */
+
+/* "Our Offerings" hero headline */
+.head1 {
+  font-size: clamp(2.8rem, 6vw, 5rem);
+  color: #F0A500;
+  padding: 72px 0 16px;
+  position: relative;
+}
+
+.head1::after {
+  content: '';
+  display: block;
+  width: 64px;
+  height: 4px;
+  background: #F0A500;
+  border-radius: 2px;
+  margin-top: 14px;
+}
+
+/* Nav list */
+.content1 ul {
+  list-style: none;
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+  padding: 0 0 40px;
+}
+
+.content1 ul li {
+  background: #132236;
+  border: 1px solid #2A4060;
+  color: #A8C0D8;
+  padding: 8px 20px;
+  border-radius: 100px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  letter-spacing: 0.06em;
+  text-transform: uppercase;
+  cursor: pointer;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+}
+
+.content1 ul li:hover {
+  background: #F0A500;
+  color: #0D1B2A;
+  border-color: #F0A500;
+}
+
+/* ---------- SECTION 1 — Content columns ---------- */
+.content2 {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: 32px;
+  padding: 0 0 64px;
+  border-bottom: 1px solid #1E3048;
+}
+
+.content3 {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.content3 p,
+.content2 > span > p {
+  color: #8DAFC8;
+  font-size: 0.95rem;
+  line-height: 1.8;
+}
+
+.content2 > span:last-child {
+  background: #132236;
+  border: 1px solid #1E3048;
+  border-radius: 12px;
+  padding: 24px;
+  align-self: start;
+}
+
+.content2 > span:last-child p {
+  color: #A8C0D8;
+  font-size: 0.9rem;
+}
+
+/* ---------- SECTION 2 — Top Performers ---------- */
+
+/* Section heading */
+.main > h1:nth-of-type(2) {
+  font-size: clamp(1.4rem, 3vw, 2.2rem);
+  color: #F5F0E8;
+  padding: 56px 0 32px;
+  position: relative;
+}
+
+.main > h1:nth-of-type(2)::before {
+  content: '🏆';
+  margin-right: 12px;
+  font-size: 1.3em;
+}
+
+/* Leaderboard grid — the signature element */
+.main > div:nth-of-type(2) {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding-bottom: 64px;
+  border-bottom: 1px solid #1E3048;
+}
+
+/* Each row */
+.main > div:nth-of-type(2) > div {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
+  align-items: center;
+  gap: 16px;
+  background: #132236;
+  border: 1px solid #1E3048;
+  border-radius: 10px;
+  padding: 18px 28px;
+  position: relative;
+  transition: transform 0.18s, box-shadow 0.18s, border-color 0.18s;
+  counter-increment: rank;
+}
+
+.main > div:nth-of-type(2) {
+  counter-reset: rank;
+}
+
+.main > div:nth-of-type(2) > div::before {
+  content: '#' counter(rank);
+  position: absolute;
+  left: -38px;
+  font-family: 'Oswald', sans-serif;
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: #4A6080;
+  letter-spacing: 0.05em;
+}
+
+/* Top 3 glow */
+.main > div:nth-of-type(2) > div:nth-child(1) {
+  border-color: #F0A500;
+  box-shadow: 0 0 24px rgba(240, 165, 0, 0.18);
+}
+
+.main > div:nth-of-type(2) > div:nth-child(2) {
+  border-color: #B0BEC5;
+  box-shadow: 0 0 16px rgba(176, 190, 197, 0.12);
+}
+
+.main > div:nth-of-type(2) > div:nth-child(3) {
+  border-color: #CD7F32;
+  box-shadow: 0 0 14px rgba(205, 127, 50, 0.12);
+}
+
+.main > div:nth-of-type(2) > div:hover {
+  transform: translateX(6px);
+  border-color: #F0A500;
+}
+
+/* Name span */
+.main > div:nth-of-type(2) > div > span:first-child {
+  font-weight: 600;
+  font-size: 1.05rem;
+  color: #F5F0E8;
+}
+
+/* Score span */
+.main > div:nth-of-type(2) > div > span:nth-child(2) {
+  font-family: 'Oswald', sans-serif;
+  font-size: 1.25rem;
+  font-weight: 700;
+  color: #F0A500;
+  letter-spacing: 0.06em;
+  white-space: nowrap;
+}
+
+/* College span */
+.main > div:nth-of-type(2) > div > span:last-child {
+  background: rgba(240, 165, 0, 0.12);
+  color: #F0C040;
+  font-size: 0.78rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 5px 14px;
+  border-radius: 100px;
+  white-space: nowrap;
+}
+
+/* ---------- SECTION 3 — CTA / Features ---------- */
+.main > div:nth-of-type(3) {
+  padding: 64px 0 0;
+}
+
+/* "Best Place" heading */
+.main > div:nth-of-type(3) > h1 {
+  font-size: clamp(1.6rem, 3.5vw, 2.6rem);
+  color: #F5F0E8;
+  padding-bottom: 40px;
+}
+
+.main > div:nth-of-type(3) > h1 em {
+  color: #F0A500;
+  font-style: normal;
+}
+
+/* Benefit cards (first 3 divs) */
+.main > div:nth-of-type(3) > div:nth-child(2),
+.main > div:nth-of-type(3) > div:nth-child(3),
+.main > div:nth-of-type(3) > div:nth-child(4) {
+  background: #132236;
+  border-left: 3px solid #F0A500;
+  border-radius: 0 8px 8px 0;
+  padding: 16px 24px;
+  margin-bottom: 12px;
+  color: #A8C0D8;
+  font-size: 0.95rem;
+  transition: background 0.2s;
+}
+
+.main > div:nth-of-type(3) > div:nth-child(2):hover,
+.main > div:nth-of-type(3) > div:nth-child(3):hover,
+.main > div:nth-of-type(3) > div:nth-child(4):hover {
+  background: #1A2E47;
+}
+
+/* Feature pills */
+.main > div:nth-of-type(3) > div:nth-child(5) {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+  padding: 32px 0 24px;
+}
+
+.main > div:nth-of-type(3) > div:nth-child(5) > span {
+  background: #0D1B2A;
+  border: 1px solid #2A4060;
+  color: #7AAFD4;
+  padding: 8px 18px;
+  border-radius: 6px;
+  font-size: 0.85rem;
+  font-weight: 500;
+  transition: background 0.2s, color 0.2s, border-color 0.2s;
+  cursor: default;
+}
+
+.main > div:nth-of-type(3) > div:nth-child(5) > span:hover {
+  background: #F0A500;
+  color: #0D1B2A;
+  border-color: #F0A500;
+}
+
+/* Lorem paragraph */
+.main > div:nth-of-type(3) > div:nth-child(6) {
+  color: #4A6080;
+  font-size: 0.9rem;
+  font-style: italic;
+  padding: 0 0 48px;
+  max-width: 600px;
+}
+
+/* "ALL THE BEST!" footer heading */
+.main > div:nth-of-type(3) > h1:last-child {
+  font-size: clamp(2rem, 5vw, 4rem);
+  background: linear-gradient(90deg, #F0A500, #FFD060, #E07B00);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+  padding: 16px 0 0;
+}
+
+/* ---------- Responsive ---------- */
+@media (max-width: 680px) {
+  .content2 {
+    grid-template-columns: 1fr;
+  }
+
+  .main > div:nth-of-type(2) > div::before {
+    display: none;
+  }
+
+  .main > div:nth-of-type(2) > div {
+    grid-template-columns: 1fr;
+    gap: 8px;
+    padding: 16px 20px;
+  }
+
+  .main > div:nth-of-type(2) > div > span:last-child {
+    align-self: start;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    transition: none !important;
+  }
+}
