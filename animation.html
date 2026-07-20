@@ -1,0 +1,176 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Nebula — Motion, Perfected</title>
+  <link rel="stylesheet" href="animation.css" />
+</head>
+<body>
+  <!-- Animated background layers -->
+  <div class="bg-gradient"></div>
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
+  <div class="orb orb-3"></div>
+  <div class="grain"></div>
+
+  <!-- Cursor glow -->
+  <div class="cursor-glow" id="cursorGlow"></div>
+
+  <!-- Navigation -->
+  <nav class="nav reveal">
+    <div class="logo">
+      <span class="logo-dot"></span>
+      Nebula
+    </div>
+    <ul class="nav-links">
+      <li><a href="#features">Features</a></li>
+      <li><a href="#showcase">Showcase</a></li>
+      <li><a href="#pricing">Pricing</a></li>
+    </ul>
+    <a href="#" class="btn btn-ghost">Get Started</a>
+  </nav>
+
+  <!-- Hero -->
+  <header class="hero">
+    <div class="hero-content">
+      <span class="badge reveal">✦ Now in public beta</span>
+      <h1 class="hero-title">
+        <span class="line"><span class="word">Motion</span></span>
+        <span class="line"><span class="word">that feels</span></span>
+        <span class="line"><span class="word gradient-text">alive.</span></span>
+      </h1>
+      <p class="hero-sub reveal">
+        A design system built for delight — buttery transitions, physics-based
+        hover states, and animations that respond to every move you make.
+      </p>
+      <div class="hero-actions reveal">
+        <a href="#" class="btn btn-primary">
+          <span>Launch demo</span>
+          <svg viewBox="0 0 24 24" width="18" height="18"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+        </a>
+        <a href="#" class="btn btn-outline">Watch film</a>
+      </div>
+    </div>
+
+    <div class="hero-visual reveal">
+      <div class="card-3d" id="card3d">
+        <div class="card-shine"></div>
+        <div class="card-row">
+          <span class="pulse"></span>
+          <div class="bar bar-a"></div>
+        </div>
+        <div class="card-row"><div class="bar bar-b"></div></div>
+        <div class="card-row"><div class="bar bar-c"></div></div>
+        <div class="card-stat">
+          <div class="stat-num" data-count="98">0</div>
+          <div class="stat-label">performance score</div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <!-- Features -->
+  <section class="features" id="features">
+    <div class="section-head reveal">
+      <h2>Crafted down to the frame</h2>
+      <p>Every interaction is tuned for 60fps and easing curves that feel just right.</p>
+    </div>
+    <div class="feature-grid">
+      <article class="feature-card reveal">
+        <div class="feature-icon">✶</div>
+        <h3>Fluid transitions</h3>
+        <p>Spring-based motion that carries momentum naturally between states.</p>
+      </article>
+      <article class="feature-card reveal">
+        <div class="feature-icon">◈</div>
+        <h3>Reactive hover</h3>
+        <p>Elements tilt, glow, and lift in response to your cursor in real time.</p>
+      </article>
+      <article class="feature-card reveal">
+        <div class="feature-icon">❋</div>
+        <h3>Scroll choreography</h3>
+        <p>Content reveals in a deliberate sequence as you move down the page.</p>
+      </article>
+    </div>
+  </section>
+
+  <!-- Showcase / marquee -->
+  <section class="showcase" id="showcase">
+    <div class="marquee">
+      <div class="marquee-track">
+        <span>DESIGN</span><span>◦</span><span>MOTION</span><span>◦</span>
+        <span>DELIGHT</span><span>◦</span><span>PERFORMANCE</span><span>◦</span>
+        <span>DESIGN</span><span>◦</span><span>MOTION</span><span>◦</span>
+        <span>DELIGHT</span><span>◦</span><span>PERFORMANCE</span><span>◦</span>
+      </div>
+    </div>
+  </section>
+
+  <!-- CTA -->
+  <section class="cta reveal" id="pricing">
+    <h2>Ready to move?</h2>
+    <p>Ship interfaces people remember.</p>
+    <a href="#" class="btn btn-primary btn-lg">
+      <span>Start building free</span>
+      <svg viewBox="0 0 24 24" width="20" height="20"><path d="M5 12h14M13 6l6 6-6 6" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>
+    </a>
+  </section>
+
+  <footer class="footer">
+    <span>Nebula</span>
+    <span>Made with motion.</span>
+  </footer>
+
+  <script>
+    // Cursor glow follow
+    const glow = document.getElementById('cursorGlow');
+    window.addEventListener('pointermove', (e) => {
+      glow.style.transform = `translate(${e.clientX}px, ${e.clientY}px)`;
+    });
+
+    // 3D card tilt
+    const card = document.getElementById('card3d');
+    const visual = card.closest('.hero-visual');
+    visual.addEventListener('pointermove', (e) => {
+      const r = visual.getBoundingClientRect();
+      const px = (e.clientX - r.left) / r.width - 0.5;
+      const py = (e.clientY - r.top) / r.height - 0.5;
+      card.style.transform = `rotateY(${px * 18}deg) rotateX(${-py * 18}deg) translateZ(0)`;
+    });
+    visual.addEventListener('pointerleave', () => {
+      card.style.transform = 'rotateY(0) rotateX(0)';
+    });
+
+    // Scroll reveal
+    const io = new IntersectionObserver((entries) => {
+      entries.forEach((en) => {
+        if (en.isIntersecting) {
+          en.target.classList.add('in');
+          io.unobserve(en.target);
+        }
+      });
+    }, { threshold: 0.15 });
+    document.querySelectorAll('.reveal').forEach((el) => io.observe(el));
+
+    // Count-up stat
+    const stat = document.querySelector('.stat-num');
+    const target = +stat.dataset.count;
+    const countIO = new IntersectionObserver((entries) => {
+      entries.forEach((en) => {
+        if (!en.isIntersecting) return;
+        let n = 0;
+        const step = () => {
+          n += Math.ceil((target - n) / 8);
+          stat.textContent = n;
+          if (n < target) requestAnimationFrame(step);
+          else stat.textContent = target;
+        };
+        step();
+        countIO.unobserve(en.target);
+      });
+    }, { threshold: 0.5 });
+    countIO.observe(stat);
+  </script>
+</body>
+</html>
