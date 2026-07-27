@@ -34,7 +34,16 @@
 
 // console.log(string.replace('man','dog'))
 
-function checksomething(...string){
-    return `hello $(a)`;
+// function checksomething(...string){
+//     return `hello $(a)`;
+// }
+// console.log(checksomething("india"));
+
+function func1(){
+    console.log("i am fun1")
+    function func2(){
+         console.log("i am func2")
+    }
+    func2()
 }
-console.log(checksomething("india"));
+func1()
