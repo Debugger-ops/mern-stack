@@ -103,15 +103,29 @@
 // const arr= [1,4,6,4,54]
 // console.log(typeof arr);
 
-const arr1 = new Array();
-arr1[0] = 3;
-console.log(arr1)
+// const arr1 = new Array();
+// arr1[0] = 3;
+// console.log(arr1)
 
-const arrmethod = ['a', 'b' , 'c', 'd', 'e']
-arrmethod.push('q')
-console.log(arrmethod)
-arrmethod.pop()
-arrmethod.pop()
-console.log(arrmethod)
-arrmethod.shift('4')
-console.log(arrmethod)
+// const arrmethod = ['a', 'b' , 'c', 'd', 'e']
+// arrmethod.push('q')
+// console.log(arrmethod)
+// arrmethod.pop()
+// arrmethod.pop()
+// console.log(arrmethod)
+// arrmethod.shift('4')
+// console.log(arrmethod)
+
+// const arrmethod = ['a', 'b', 'd', 'g', 'h'];
+// arrmethod.splice(2,5,54,54,65)
+// console.log(arrmethod)
+// arrmethod.splice(3)
+// console.log(arrmethod)
+
+const concatinationarray = [1,2,3,4,5];
+const concat2 = [3,4,5]
+// const final = concatinationarray + concat2
+// console.log(typeof final)
+// console.log(final)
+concat2 = [...concatinationarray]
+console.log(concat2)
