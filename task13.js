@@ -65,7 +65,7 @@ anotherway.forEach((num) => {
         selecting.style.color = "red"
        
         setTimeout(function(){
-            selecting.style.transform = "scale(1)"
+            selecting.style.transform = "scale(1 )"
         }, 500)
     });
 });
