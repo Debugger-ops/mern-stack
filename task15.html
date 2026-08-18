@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Registration Form</title>
+  <link rel="stylesheet" href="task15.css">
+</head>
+<body>
+
+  <main class="form-wrapper">
+    <h1>Create Account</h1>
+
+    <form id="myForm" novalidate>
+
+      <!-- Name -->
+      <div class="field">
+        <label for="name">Full Name</label>
+        <input type="text" id="name" name="name" placeholder="e.g. Jordan Smith">
+        <span class="error-msg" id="nameError"></span>
+      </div>
+
+      <!-- Email -->
+      <div class="field">
+        <label for="email">Email Address</label>
+        <input type="email" id="email" name="email" placeholder="e.g. jordan@example.com">
+        <span class="error-msg" id="emailError"></span>
+      </div>
+
+      <!-- Phone -->
+      <div class="field">
+        <label for="phone">Phone Number</label>
+        <input type="tel" id="phone" name="phone" placeholder="10-digit mobile number" maxlength="10">
+        <span class="error-msg" id="phoneError"></span>
+      </div>
+
+      <!-- Password -->
+      <div class="field">
+        <label for="password">Password</label>
+        <input type="password" id="password" name="password" placeholder="At least 8 characters">
+        <span class="error-msg" id="passwordError"></span>
+      </div>
+
+      <!-- Gender -->
+      <fieldset class="field">
+        <legend>Gender</legend>
+        <div class="radio-group">
+          <label class="radio-option">
+            <input type="radio" name="gender" id="genderMale" value="male">
+            Male
+          </label>
+          <label class="radio-option">
+            <input type="radio" name="gender" id="genderFemale" value="female">
+            Female
+          </label>
+          <label class="radio-option">
+            <input type="radio" name="gender" id="genderOther" value="other">
+            Other
+          </label>
+        </div>
+        <span class="error-msg" id="genderError"></span>
+      </fieldset>
+
+      <!-- Address -->
+      <div class="field">
+        <label for="address">Address</label>
+        <textarea id="address" name="address" rows="3" placeholder="Street, city, state"></textarea>
+        <span class="error-msg" id="addressError"></span>
+      </div>
+
+      <!-- Date of Birth -->
+      <div class="field">
+        <label for="dob">Date of Birth</label>
+        <input type="date" id="dob" name="dob">
+        <span class="error-msg" id="dobError"></span>
+      </div>
+
+      <!-- Terms -->
+      <div class="field checkbox-field">
+        <label class="checkbox-option">
+          <input type="checkbox" id="terms" name="terms">
+          I agree to the Terms &amp; Conditions
+        </label>
+        <span class="error-msg" id="termsError"></span>
+      </div>
+
+      <button type="submit" class="submit-btn">Create Account</button>
+
+      <p class="success-msg" id="successMsg" role="status">Account created successfully!</p>
+
+    </form>
+  </main>
+
+  <script src="task15.js"></script>
+</body>
+</html>

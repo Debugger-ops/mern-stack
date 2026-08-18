@@ -1,157 +1,165 @@
-// const form = document.getElementById('form')
-// form.addEventListener('submit', (event) => {
-//     event.preventDefault();
-//     const username = document.getElementById('username').value;
-//     if(username.trim() === '') {
-//         alert('Please enter a username');
-//     } else {
-//         alert(`Username submitted: ${username}`);
-//     }
+// Form validation
+// Fields: name, email, phone, password, gender, address, dob, terms
 
-//     const password = document.getElementById('password').value;
-//     if(password.trim() === '') {
-//         alert('Please enter a password');
-//     } else {
-//         alert(`Password submitted: ${password}`);
-//     }   
-// });
+const form = document.getElementById('myForm');
+const successMsg = document.getElementById('successMsg');
 
-// regular XPathExpression
-// /.     /
+// Fields validated with a simple text/textarea input + matching <id>Error span
+const TEXT_FIELD_IDS = ['name', 'email', 'phone', 'password', 'address', 'dob'];
 
+const PATTERNS = {
+  name: /^[A-Za-z\s]{2,}$/,
+  email: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
+  phone: /^[6-9]\d{9}$/,
+  password: /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/,
+  address: /^[A-Za-z0-9\s,.-]{5,}$/,
+};
 
-// const name1 = /helloIndia/
-// console.log(RegExp.leftContext(name))
+function showError(id, message) {
+  const errorEl = document.getElementById(id + 'Error');
+  if (errorEl) errorEl.textContent = message;
 
-//form validation in js
-// name,
-// email,
-// phone,
-// password,
-// gender,
-// checkbox,
-// address,
-// dob,
+  const input = document.getElementById(id);
+  if (input) input.classList.add('error');
+}
 
-// submit
+function clearError(id) {
+  const errorEl = document.getElementById(id + 'Error');
+  if (errorEl) errorEl.textContent = '';
 
-document.getElementById('myForm').addEventListener('submit', function (e) {
-  e.preventDefault();
-  let isValid = true;
- 
-  function showError(id, message) {
-    document.getElementById(id + 'Error').textContent = message;
-    const input = document.getElementById(id);
-    if (input) input.classList.add('error');
-    isValid = false;
+  const input = document.getElementById(id);
+  if (input) input.classList.remove('error');
+}
+
+function clearAllErrors() {
+  [...TEXT_FIELD_IDS, 'gender', 'terms'].forEach(clearError);
+}
+
+function validateName(value) {
+  if (value === '') return 'Name is required.';
+  if (!PATTERNS.name.test(value)) return 'Name must be at least 2 letters, no numbers or symbols.';
+  return '';
+}
+
+function validateEmail(value) {
+  if (value === '') return 'Email is required.';
+  if (!PATTERNS.email.test(value)) return 'Enter a valid email address.';
+  return '';
+}
+
+function validatePhone(value) {
+  if (value === '') return 'Phone number is required.';
+  if (!PATTERNS.phone.test(value)) return 'Enter a valid 10-digit phone number starting with 6-9.';
+  return '';
+}
+
+function validatePassword(value) {
+  if (value === '') return 'Password is required.';
+  if (!PATTERNS.password.test(value)) return 'Min 8 characters, with uppercase, lowercase & a number.';
+  return '';
+}
+
+function validateAddress(value) {
+  if (value === '') return 'Address is required.';
+
+  if (!PATTERNS.address.test(value)) {
+    return 'Enter a valid address.';
   }
- 
-  function clearError(id) {
-    document.getElementById(id + 'Error').textContent = '';
-    const input = document.getElementById(id);
-    if (input) input.classList.remove('error');
+
+  return '';
+}
+
+function validateDob(value) {
+  if (value === '') return 'Date of birth is required.';
+
+  const dobDate = new Date(value);
+  const today = new Date();
+
+  if (dobDate > today) return 'Date of birth cannot be in the future.';
+
+  let age = today.getFullYear() - dobDate.getFullYear();
+  const monthDiff = today.getMonth() - dobDate.getMonth();
+  if (monthDiff < 0 || (monthDiff === 0 && today.getDate() < dobDate.getDate())) {
+    age--;
   }
- 
-  // reset all errors
-  ['name', 'email', 'phone', 'password', 'gender', 'address', 'dob', 'terms']
-    .forEach(clearError);
- 
-  const name = document.getElementById('name').value.trim();
-  const email = document.getElementById('email').value.trim();
-  const phone = document.getElementById('phone').value.trim();
-  const password = document.getElementById('password').value;
+  if (age < 18) return 'You must be at least 18 years old.';
+
+  return '';
+}
+
+const VALIDATORS = {
+  name: validateName,
+  email: validateEmail,
+  phone: validatePhone,
+  password: validatePassword,
+  address: validateAddress,
+  dob: validateDob,
+};
+
+function validateField(id) {
+  const input = document.getElementById(id);
+  const message = VALIDATORS[id](input.value.trim());
+  if (message) {
+    showError(id, message);
+    return false;
+  }
+  clearError(id);
+  return true;
+}
+
+function validateGender() {
   const gender = document.querySelector('input[name="gender"]:checked');
-  const address = document.getElementById('address').value.trim();
-  const dob = document.getElementById('dob').value;
-  const terms = document.getElementById('terms').checked;
- 
-  // Name: letters and spaces only, min 2 chars
-  if (name === '') {
-    showError('name', 'Name is required.');
-  } else if (!/^[A-Za-z\s]{2,}$/.test(name)) {
-    showError('name', 'Name must be at least 2 letters, no numbers or symbols.');
-  }
- 
-  // Email
-  if (email === '') {
-    showError('email', 'Email is required.');
-  } else if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
-    showError('email', 'Enter a valid email address.');
-  }
- 
-  // Phone: exactly 10 digits. start with 6,7,8,9
-  if (phone === '') {
-    showError('phone', 'Phone number is required.');
-
-  }else if (!/^[6-9][0-9]{9}$/.test(phone)) {
-    showError('phone', 'Enter a valid 10-digit phone number.');
-  }
-   else if (!/^\d{10}$/.test(phone)) {
-    showError('phone', 'Enter a valid 10-digit phone number.');
-  }
- 
-  // Password: min 8 chars, at least 1 uppercase, 1 lowercase, 1 number
-  if (password === '') {
-    showError('password', 'Password is required.');
-  } else if (!/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d).{8,}$/.test(password)) {
-    showError('password', 'Min 8 characters, with uppercase, lowercase & a number.');
-  }
- 
-  // Gender
   if (!gender) {
     showError('gender', 'Please select a gender.');
+    return false;
   }
- 
-  // Address
-  if (address === '') {
-    showError('address', 'Address is required.');
-  } else if (address.length < 5) {
-    showError('address', 'Address must be at least 5 characters.');
-  }
- 
-  // Date of birth: required + must be 18+ years old
-  if (dob === '') {
-    showError('dob', 'Date of birth is required.');
-  } else {
-    const dobDate = new Date(dob);
-    const today = new Date();
-    let age = today.getFullYear() - dobDate.getFullYear();
-    const m = today.getMonth() - dobDate.getMonth();
-    if (m < 0 || (m === 0 && today.getDate() < dobDate.getDate())) age--;
-    if (dobDate > today) {
-      showError('dob', 'Date of birth cannot be in the future.');
-    } else if (age < 18) {
-      showError('dob', 'You must be at least 18 years old.');
-    }
-  }
- 
-  // Terms checkbox
+  clearError('gender');
+  return true;
+}
+
+function validateTerms() {
+  const terms = document.getElementById('terms').checked;
   if (!terms) {
     showError('terms', 'You must agree to the terms.');
+    return false;
   }
- 
-  const successMsg = document.getElementById('successMsg');
+  clearError('terms');
+  return true;
+}
+
+form.addEventListener('submit', function (event) {
+  event.preventDefault();
+
+  clearAllErrors();
+
+  // Run every validator; use of & (not &&) intentionally avoided here so all
+  // fields are checked even after the first failure (short-circuiting would
+  // skip later validations and hide multiple errors from the user at once).
+  const results = [
+    ...TEXT_FIELD_IDS.map(validateField),
+    validateGender(),
+    validateTerms(),
+  ];
+  const isValid = results.every(Boolean);
+
   if (isValid) {
     successMsg.style.display = 'block';
-    this.reset();
-    setTimeout(() => { successMsg.style.display = 'none'; }, 3000);
+    form.reset();
+    setTimeout(() => {
+      successMsg.style.display = 'none';
+    }, 3000);
   } else {
     successMsg.style.display = 'none';
   }
 });
- 
-// live-clear error on input
-['name', 'email', 'phone', 'password', 'address', 'dob'].forEach(id => {
-  document.getElementById(id).addEventListener('input', function () {
-    this.classList.remove('error');
-    document.getElementById(id + 'Error').textContent = '';
-  });
+
+// Live-clear error as the user fixes a field
+TEXT_FIELD_IDS.forEach((id) => {
+  document.getElementById(id).addEventListener('input', () => clearError(id));
 });
-document.querySelectorAll('input[name="gender"]').forEach(r => {
-  r.addEventListener('change', () => {
-    document.getElementById('genderError').textContent = '';
-  });
+
+document.querySelectorAll('input[name="gender"]').forEach((radio) => {
+  radio.addEventListener('change', () => clearError('gender'));
 });
-document.getElementById('terms').addEventListener('change', function () {
-  document.getElementById('termsError').textContent = '';
-});
+
+document.getElementById('terms').addEventListener('change', () => clearError('terms'));
